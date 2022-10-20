@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  test:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+    depends_on:
+      - mariadb
+    command: bin/wait-for mariadb:3306 -- bundle exec rspec
+    environment:
+      RIGHTS_DATABASE_CONNECTION_STRING: "mysql2://ht_rights:ht_rights@mariadb/ht"
+
+  mariadb:
+    image: ghcr.io/hathitrust/db-image
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: ht
+      MYSQL_USER: ht_rights
+      MYSQL_PASSWORD: ht_rights
+
+volumes:
+  gem_cache:
