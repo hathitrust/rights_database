@@ -18,7 +18,6 @@ jobs:
       - name: Set up tests
         run: |
           docker compose build
-          docker compose run test bundle install
 
       - name: Run standardrb
         run: docker compose run test bundle exec standardrb
@@ -30,3 +29,5 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.github_token }}
+          flag-name: unit
+          parallel: true
