@@ -8,5 +8,6 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 
 WORKDIR /usr/src/app
 ENV BUNDLE_PATH /gems
+COPY Gemfile* /usr/src/app/
 RUN gem install bundler
 RUN bundle install
