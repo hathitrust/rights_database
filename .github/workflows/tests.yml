@@ -1,5 +1,4 @@
-
-name: Run CI
+name: Run Tests
 
 on:
   pull_request:
@@ -27,7 +26,3 @@ jobs:
 
       - name: Report to Coveralls
         uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.github_token }}
-          flag-name: unit
-          parallel: true
