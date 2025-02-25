@@ -1,0 +1,29 @@
+name: Run Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up tests
+        run: |
+          docker compose build
+
+      - name: Run standardrb
+        run: docker compose run test bundle exec standardrb
+
+      - name: Run tests
+        run: docker compose run test bundle exec rspec
+
+      # Removing - Unable to add repo to coveralls so reporting fails
+      # - name: Report to Coveralls
+      #   uses: coverallsapp/github-action@v2
