@@ -7,7 +7,7 @@ module RightsDatabase
 
     def initialize(item_id:)
       @item_id = item_id
-      @namespace, @id = @item_id.split(/\./, 2)
+      @namespace, @id = @item_id.split(".", 2)
       load_from_db
     end
 
